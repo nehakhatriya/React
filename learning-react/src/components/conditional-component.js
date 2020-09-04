@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import Person from './Person'
+import Radium from 'radium'
 
 class conditional extends Component {
     //state property.
@@ -25,26 +26,40 @@ class conditional extends Component {
         this.setState({ persons: persons},() => { console.log(this.state.persons[0]) })
     }
     render() {
+        const style={
+            backgroundColor:'green', color:"white",
+            font:'inherit',border:'1px solid blue',
+            padding:'8px', cursor:'pointer',
+            //using radium we can assign pseudo selector as properties
+            ':hover':{
+                backgroundColor:'lightgreen',
+                color:'black'
+            }
+        }
         let persons = null
         if (this.state.toggle) {
             persons = (
-                <div>
-                    { this.state.persons.map((person,index)=>{
+            
+                     this.state.persons.map((person,index)=>{
                         return  <Person
                         click={()=>this.deletePersonhandler(index)}
                         name={person.name}
                         age={person.age}
                         key={person.id}
                         changed={(event)=>this.changeNameHandler(event,person.id)}/>}
-                    )}
-
-                </div>
+                    )
+                         
             )
+            style.backgroundColor='red';  
+            style[':hover']={
+                backgroundColor:'salmon',
+                color:'black'
+            }   
         }
         return (
             <div className="App">
                 <h3>HELLO WORLD!!</h3>
-                <button onClick={this.toogleUsersHandler}>Toggle Names</button>
+                <button style={style} onClick={this.toogleUsersHandler}>Toggle Names</button>
                 {/* this refers to the base Component i.e App */}
                 <h3>Toggle Names with conditional  COMPONENT</h3>
                 {persons}
@@ -53,4 +68,4 @@ class conditional extends Component {
     }
 }
 
-export default conditional;
+export default Radium(conditional);

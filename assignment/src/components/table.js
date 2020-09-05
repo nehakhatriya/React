@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import EmployeeTableContent from './tableStructure'
+import EmployeeForm from './form';
 class EmployeeTable extends Component {
 
     state = { employees: [{ name: "neha", job: "manager" }, { name: "nikita", job: "trainee" }, { name: "jai", job: "consultant" }] }
-    deleteEmployee(event, index) {
+    deleteEmployee=(event, index) =>{
         const emp = this.state.employees.slice()
         emp.splice(index, 1)
         this.setState({ employees: emp })
     }
 
+  
     render() {
         let employees = (
 

@@ -9,7 +9,12 @@ class EmployeeTable extends Component {
         emp.splice(index, 1)
         this.setState({ employees: emp })
     }
-
+    addEmp=(newname,newjob)=>{
+       // console.log(`inside add emp ${name} ${job}`)
+        const emp = this.state.employees.slice()
+        emp.push({name:newname,job:newjob})
+        this.setState({ employees: emp })
+    }
   
     render() {
         let employees = (
@@ -22,6 +27,9 @@ class EmployeeTable extends Component {
         return (
             < div >
                 <div className="container">
+                    <EmployeeForm addEmp={this.addEmp}>
+                    </EmployeeForm>
+                    <hr></hr>
                     <h4> Employee Table</h4>
                     <table className="table">
                         <tr>

@@ -27,11 +27,11 @@ function EmployeeForm (props) {
                 <form>
                     <div class="form-group">
                         <label for="eempname" ><b>Name:</b></label>
-                        <input type="test" value={name1.name} onChange={changenamehandler} class="form-control" aria-describedby="emailHelp" placeholder="Enter name" />
+                        <input type="test" id="name" value={name1.name} onChange={changenamehandler} class="form-control" aria-describedby="emailHelp" placeholder="Enter name" />
                     </div>
                     <div class="form-group">
                         <label for="empjob"><b>Job:</b></label>
-                        <input type="text"  value={job1.job} onChange={changejobhandler} class="form-control"  placeholder="job" />
+                        <input type="text"  id="job" value={job1.job} onChange={changejobhandler} class="form-control"  placeholder="job" />
                     </div>
                     <button type="button" onClick={addnewEmp} class="btn btn-primary" > Add </button>
                 </form>

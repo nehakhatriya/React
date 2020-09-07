@@ -4,6 +4,7 @@ import Person from './Person'
 import Radium from 'radium'
 import WithClass from '../components/hoc/WithClass'
 import AuthContext from './context/auth-context'
+import ErrorBoundary from './errorboundary';
 
 class conditional extends Component {
 
@@ -93,7 +94,9 @@ class conditional extends Component {
                     {/* this refers to the base Component i.e App */}
                     <h3>Toggle Names with conditional  COMPONENT</h3>
                     <button key="loginbtn" style={style} onClick={this.loginhandler}>Login</button>
+                    <ErrorBoundary>
                     {persons}
+                    </ErrorBoundary>
                 </WithClass>
                 </AuthContext.Provider>
             </Fragment>

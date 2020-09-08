@@ -33,9 +33,9 @@ class EmployeeTable extends Component {
                     <h4> Employee Table</h4>
                     <table className="table">
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Job</th>
-                            <th scope="col">Remove</th>
+                            <th id="Name" scope="col">Name</th>
+                            <th id="Job" scope="col">Job</th>
+                            <th id="Remove"scope="col">Remove</th>
                         </tr>
                         {employees}
                     </table>

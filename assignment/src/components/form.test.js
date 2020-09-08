@@ -1,4 +1,4 @@
-import {configure,shallow} from 'enzyme'
+import {configure,shallow,mount} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import EmployeeForm from './form'
 import React from 'react'
@@ -22,9 +22,12 @@ it('on change of value in the field name and job, the state of that field in the
     wrapper.find('#job').simulate('change',{target:{id:"job",value:"trainee"}})
     expect(wrapper.find('#job').prop('value')).toBe("trainee")
 })
-// it('on Adding the employee, click event handler should be triggered',()=>{
-//     const fn=jest.fn();
-//     wrapper.find('button').simulate('click')
-//     expect(fn).toHaveBeenCalled();
-// })
+it("should run click handler on click", () => {
+    const changeName = jest.fn();
+    wrapper=shallow(<EmployeeForm addEmp={changeName}/>)
+    wrapper.find("button").simulate("click");
+    expect(changeName).toBeTruthy();
+  });
+
+
 })

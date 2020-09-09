@@ -1,0 +1,30 @@
+
+  .row {
+    margin-top: 4px;
+  }
+  
+  .lastrow {
+    float:left;
+    margin-top: -11.5%;
+  }
+  
+  button {
+    width: 62px;
+    margin: 2px;
+  }
+  
+  .invisible {
+    width:0;
+  }
+  
+  .btn-zero {
+    width: 134px;
+  }
+  
+  .btn-result {  
+    float:right;
+    margin-left:4px;  
+    height: 74px;
+  }
+  
+  

@@ -14,7 +14,7 @@ const Person = (props) => {
        const num1=inputnum1ref.current.value
        const num2=inputnum2ref.current.value
        try{
-           if(num2==0)
+           if(num2===0)
            throw new Error("num2 cannot be zero")
            else
            resultref.current.value=num1/num2;

@@ -11,70 +11,74 @@ class Calculator extends Component {
         nextVal: ''
     }
     inputValueHandler = (inputVal) => {
-        var result
+        var result;
         if (typeof inputVal === 'number') {
-            if (this.state.operation === null) {
-                var currentVal = this.state.currentVal + inputVal
-                this.setState({ currentVal: currentVal })
+            if ((this.state.operation === null) || (this.state.operation === "AC") || (this.state.operation === "=")) {
+                if (this.state.operation === "=") {
+                    console.log("inside equal if")
+                    this.setState({ currentVal: "" }, () => {
+                        var currentVal = this.state.currentVal + inputVal
+                        this.setState({ currentVal: currentVal }, () => {
+                            console.log("current val in state:" +
+                                this.state.currentVal)
+                        })
+                    })
+                }
+                else {
+                    var currentVal = this.state.currentVal + inputVal
+                    this.setState({ currentVal: currentVal }, () => {
+                        console.log("current val in state:" +
+                            this.state.currentVal)
+                    })
+                }
             }
             else {
+                console.log("inside nextval")
                 var nextVal = this.state.nextVal + inputVal
-                this.setState({ nextVal: nextVal })
-                if (this.state.nextVal !== '') { result = ''+this.calculate()
-                    this.setState({ result: result ,nextVal:'',currentVal:result})    
-                }
+                this.setState({ nextVal: nextVal }, () => console.log("next val in state:" + this.state.nextVal))
             }
         }
         else {
             var operator = inputVal
-            if(operator==="AC"){
-                    console.log("inside AC")
-                    this.setState({result: 0, operation:null,currentVal:"", nextVal:""})
-                    console.log(this.state)
+            if (operator === "AC") {
+                this.setState({ result: 0, operation: "AC", currentVal: "", nextVal: "" }, () => { console.log("state after AC op c= " + this.state.currentVal + "next= " + this.state.nextVal + "op= " + this.state.operation) })
             }
-            if(operator==="="&&this.state.nextVal !== ''){
-                    console.log("inside equal")
-                     currentVal=""+result;
-                     this.setState({currentVal:currentVal,operation:null})
-                     console.log(this.state)
-            }
-            console.log("opearator "+operator)
             this.setState({ operation: operator })
-            if (this.state.nextVal !== '') {
-                result = ''+this.calculate()
-                this.setState({ result: result ,nextVal:'',currentVal:result})    
+            if ((this.state.nextVal !== '')&&(this.state.operation!=="AC")) {
+                console.log("inside last if")
+                result = '' + this.calculate()
+                this.setState({ result: result, nextVal: '', currentVal: result })
             }
         }
     }
-calculate = () => {
-    var operator = this.state.operation
-    var result;
-    switch (operator) {
-        case "+":  result= parseInt(this.state.currentVal) + parseInt(this.state.nextVal);break;
-        case "-":  result=  parseInt(this.state.currentVal) - parseInt(this.state.nextVal);break;
-        case "/":  result=  parseInt(this.state.currentVal) / parseInt(this.state.nextVal);break;
-        case "*":  result=  parseInt(this.state.currentVal) * parseInt(this.state.nextVal);break;  
+    calculate = () => {
+        var operator = this.state.operation
+        var result;
+        switch (operator) {
+            case "+": result = parseFloat(this.state.currentVal) + parseFloat(this.state.nextVal); break;
+            case "-": result = parseFloat(this.state.currentVal) - parseFloat(this.state.nextVal); break;
+            case "/": result = parseFloat(this.state.currentVal) / parseFloat(this.state.nextVal); break;
+            case "*": result = parseFloat(this.state.currentVal) * parseFloat(this.state.nextVal); break;
+        }
+        return result;
     }
-    return result;
-}
-render() {
-    return (
-        <div>
-            <div className="container">
-                <div className={classes.header}>
-                    <h3> Calculator</h3></div>
-                <div id="calc" className={classes.calc}>
-                    <div id="display" className={classes.display}>
-                        <div id="result"><p>{this.state.result}</p></div>
-                        <div id="previous"><p>{this.state.currentVal}{this.state.operation}{this.state.nextVal}</p></div>
+    render() {
+        return (
+            <div>
+                <div className="container">
+                    <div className={classes.header}>
+                        <h3> Calculator</h3></div>
+                    <div id="calc" className={classes.calc}>
+                        <div id="display" className={classes.display}>
+                            <div id="result"><p>{this.state.result}</p></div>
+                            <div id="previous"><p>{this.state.currentVal}{this.state.operation}{this.state.nextVal}</p></div>
+                        </div>
+                        <Keyboard inputValue={this.inputValueHandler} ></Keyboard>
                     </div>
-                    <Keyboard inputValue={this.inputValueHandler} ></Keyboard>
                 </div>
             </div>
-        </div>
-    )
+        )
 
+    }
 }
-}
-
 export default Calculator;

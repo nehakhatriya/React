@@ -1,4 +1,5 @@
 import React from 'react';
+// import {withRoute} from 'react-router-dom'
 
 import './Post.css';
 
@@ -12,3 +13,5 @@ const post = (props) => (
 );
 
 export default post;
+// export default withRoute(post);
+
